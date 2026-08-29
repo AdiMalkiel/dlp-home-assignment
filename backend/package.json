@@ -5,12 +5,14 @@
   "scripts": {
     "dev": "node --env-file=.env --import=tsx --watch src/server.ts",
     "build": "tsc",
-    "start": "node --env-file=.env dist/server.js",
+    "start": "node dist/server.js",
+    "start:local": "node --env-file=.env dist/server.js",
     "migrate:create": "kysely migrate:make",
     "migrate:latest": "kysely migrate:latest",
     "migrate:down": "kysely migrate:down",
     "migrate:list": "kysely migrate:list",
-    "db:codegen": "kysely-codegen --out-file src/db/types.ts"
+    "db:codegen": "kysely-codegen --out-file src/db/types.ts",
+    "db:seed": "tsx .config/seed.ts"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
@@ -20,7 +22,8 @@
     "kysely-ctl": "^0.21.0",
     "prettier": "^3.9.6",
     "tsx": "^4.23.12",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
   },
   "dependencies": {
     "express": "^5.2.1",

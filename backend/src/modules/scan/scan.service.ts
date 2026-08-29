@@ -1,27 +1,10 @@
 import { db } from '../../db/database';
-import type { ScanDataType, ScanInput } from './scan.schema';
+import type { ScanInput, ScanResult } from './scan.schema';
+import { checkDataType, type ScanDataType } from './scan.utils';
 
-const countKeywordMatches = (text: string, keywords: string[]): number => {
-  const normalizedText = text.toLowerCase();
-
-  return keywords.reduce((total, keyword) => {
-    const regex = new RegExp(`\\b${keyword}\\b`, 'g');
-    const matches = normalizedText.match(regex);
-
-    return total + (matches?.length ?? 0);
-  }, 0);
-};
-
-const checkDataType = (text: string, dataType: ScanDataType) => {
-  const matchCount = countKeywordMatches(text, dataType.content);
-
-  return {
-    match: matchCount >= dataType.threshold,
-    matchCount,
-  };
-};
-
-export const scan = async (input: ScanInput) => {
+export const scan = async (
+  input: ScanInput,
+): Promise<ScanResult | undefined> => {
   const dataSet = await db
     .selectFrom('data_sets')
     .selectAll()

@@ -7,9 +7,17 @@ export const scanSchema = z.object({
 
 export type ScanInput = z.infer<typeof scanSchema>;
 
-export type ScanDataType = {
+export interface DetectedObject {
   id: string;
   name: string;
-  content: string[];
-  threshold: number;
-};
+  match_count: number;
+}
+
+export type ScanResult =
+  | {
+      status: 'match';
+      detected_objects: DetectedObject[];
+    }
+  | {
+      status: 'not matched';
+    };

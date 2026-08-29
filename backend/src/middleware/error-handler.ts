@@ -1,7 +1,6 @@
-import type { ErrorRequestHandler } from 'express';
-
 import { ZodError } from 'zod';
 import { StatusCodes } from 'http-status-codes';
+import type { ErrorRequestHandler } from 'express';
 
 export const errorHandler: ErrorRequestHandler = (error, _req, res, _next) => {
   if (error instanceof ZodError) {
