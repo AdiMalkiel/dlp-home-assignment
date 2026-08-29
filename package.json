@@ -12,7 +12,7 @@
     "migrate:down": "kysely migrate:down",
     "migrate:list": "kysely migrate:list",
     "db:codegen": "kysely-codegen --out-file src/db/types.ts",
-    "db:seed": "tsx .config/seed.ts"
+    "db:seed": "tsx --env-file=.env .config/seed.ts"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
